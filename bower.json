@@ -13,17 +13,22 @@
     "polymer": "^2.0.0"
   },
   "authors": [
-    "KimMinJeong <matzjun@naver.com>"
+    "mjkim"
   ],
   "description": "",
   "license": "MIT",
-  "homepage": "",
-  "private": true,
+  "homepage": "https://github.com/HealthHub-Project/hh-clinical-info",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "test",
     "tests"
+  ],
+  "keywords": [
+    "polymer",
+    "healthhub",
+    "textarea",
+    "clinicalInfo"
   ]
 }
