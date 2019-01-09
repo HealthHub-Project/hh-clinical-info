@@ -1,0 +1,100 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="hh-clinical-info">
+  <template>
+    <style>
+      :host {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .textarea-clinical {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background-color: #252934;
+      }
+      .areaCCInfo {
+        margin: 20px;
+        width: 100%;
+        height: calc(100% - 40px);
+        background-color: #252934;
+        color: #d7d1cb;
+        padding: 0;
+      }
+
+      .areaCCInfo:focus {
+        border-color: #2baab1;
+      }
+
+    </style>
+    <div class="textarea-clinical">
+      <textarea placeholder="Clinical Info" id="ccInfo" class="areaCCInfo" value="{{ccInfoData}}"></textarea>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `hh-clinical-info`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    (function () {
+
+      let _this;
+
+      class HhClinicalInfo extends Polymer.Element {
+        static get is() {
+            return 'hh-clinical-info';
+        }
+
+        constructor() {
+            super();
+            _this = this;
+        }
+
+        static get properties() {
+          return {
+            prop1: {
+              type: String,
+              value: 'hh-clinical-info'
+            },
+            ccInfoData: {
+              type: String
+            }
+          };
+        }
+
+        /**
+         * function getClinicalInfo
+         * ClinicalInfo 조회
+         *
+         * Create by 김민정 on 2019-01-08 오전 11:56
+         * @param {}
+         * @return {}
+        **/
+        getClinicalInfo(info) {
+            _this.ccInfoData = info;
+        }
+
+        /**
+         * function clearClinicalInfo
+         * ClinicalInfo 초기화
+         *
+         * Create by 김민정 on 2019-01-08 오전 11:55
+         * @param {}
+         * @return {}
+        **/
+        clearClinicalInfo() {
+            _this.$.ccInfo.value = "";
+        }
+      }
+
+      window.customElements.define(HhClinicalInfo.is, HhClinicalInfo);
+    })()
+  </script>
+</dom-module>
