@@ -30,5 +30,6 @@
     "healthhub",
     "textarea",
     "clinicalInfo"
-  ]
+  ],
+  "private": true
 }
