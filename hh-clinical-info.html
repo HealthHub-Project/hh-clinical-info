@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../vaadin-icons/vaadin-icons.html">
 
 <dom-module id="hh-clinical-info">
   <template>
@@ -39,12 +41,16 @@
         color: #aaaaaa;
       }
 
+      .areaBtn:hover {
+        color: #2baab1;
+      }
+
     </style>
 
     <div class="textarea-container">
-      <textarea id="ccInfo" class="areaCCInfo" value="{{ccInfoData}}"></textarea>
+      <textarea id="ccInfo" class="areaCCInfo" value="{{ccInfoData}}" readonly="readonly"></textarea>
       <div class="icon-container">
-        <paper-icon-button id="saveBtn" class="areaBtn" icon="vaadin:download" hidden></paper-icon-button>
+        <paper-icon-button id="saveBtn" class="areaBtn" icon="vaadin:pencil" hidden></paper-icon-button>
       </div>
     </div>
   </template>
@@ -85,11 +91,60 @@
             super.ready();
 
             this.$.saveBtn.addEventListener("click", () => {
-                let param = {};
-                param.detail = this.$.ccInfo.value;
 
-                this.dispatchEvent(new CustomEvent('clinicalInfoSaveEvent', param));
+                let icon = this.$.saveBtn.icon;
+
+                if(icon === "vaadin:pencil") {
+                    this.saveMode();
+                }
+                else {
+                    let param = {};
+                    param.detail = this.$.ccInfo.value;
+
+                    this.dispatchEvent(new CustomEvent('clinicalInfoSaveEvent', param));
+
+                    this.initMode();
+                }
             });
+        }
+
+        /**
+         * function initMode
+         * 아이콘, 입력창 상태 초기모드
+         *
+         * Create by 김민정 on 2019-02-13 오후 6:20
+         * @param {}
+         * @return {}
+         **/
+        initMode() {
+            this.$.saveBtn.icon = "vaadin:pencil";
+            this.$.ccInfo.readOnly = true;
+        }
+
+        /**
+         * function saveMode
+         * 아이콘, 입력창 상태 저장모드
+         *
+         * Create by 김민정 on 2019-02-13 오후 6:21
+         * @param {}
+         * @return {}
+         **/
+        saveMode() {
+            this.$.saveBtn.icon = "vaadin:download";
+            this.$.ccInfo.readOnly = false;
+        }
+
+        /**
+         * function setClinicalInfo
+         * ClinicalInfo 조회후 data 출력
+         *
+         * Create by 김민정 on 2019-01-08 오전 11:56
+         * @param {}
+         * @return {}
+         **/
+        setClinicalInfo(info) {
+            this.initMode();
+            this.ccInfoData = info;
         }
 
         /**
