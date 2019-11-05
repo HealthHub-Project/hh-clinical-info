@@ -68,11 +68,11 @@
 
       class HhClinicalInfo extends Polymer.Element {
         static get is() {
-            return 'hh-clinical-info';
+          return 'hh-clinical-info';
         }
 
         constructor() {
-            super();
+          super();
         }
 
         static get properties() {
@@ -88,24 +88,24 @@
         }
 
         ready() {
-            super.ready();
+          super.ready();
 
-            this.$.saveBtn.addEventListener("click", () => {
+          this.$.saveBtn.addEventListener("click", () => {
 
-                let icon = this.$.saveBtn.icon;
+            let icon = this.$.saveBtn.icon;
 
-                if(icon === "vaadin:pencil") {
-                    this.saveMode();
-                }
-                else {
-                    let param = {};
-                    param.detail = this.$.ccInfo.value;
+            if(icon === "vaadin:pencil") {
+              this.saveMode();
+            }
+            else {
+              let param = {};
+              param.detail = this.$.ccInfo.value;
 
-                    this.dispatchEvent(new CustomEvent('clinicalInfoSaveEvent', param));
+              this.dispatchEvent(new CustomEvent('clinicalInfoSaveEvent', param));
 
-                    this.initMode();
-                }
-            });
+              this.initMode();
+            }
+          });
         }
 
         /**
@@ -117,8 +117,10 @@
          * @return {}
          **/
         initMode() {
-            this.$.saveBtn.icon = "vaadin:pencil";
-            this.$.ccInfo.readOnly = true;
+          this.$.saveBtn.icon = "vaadin:pencil";
+          this.$.ccInfo.readOnly = true;
+          this.$.saveBtn.display = "none";
+          this.$.saveBtn.style.color = "#aaaaaa";
         }
 
         /**
@@ -130,8 +132,10 @@
          * @return {}
          **/
         saveMode() {
-            this.$.saveBtn.icon = "vaadin:download";
-            this.$.ccInfo.readOnly = false;
+          this.$.saveBtn.icon = "vaadin:download";
+          this.$.saveBtn.display = "block";
+          this.$.ccInfo.readOnly = false;
+          this.$.saveBtn.style.color = "red";
         }
 
         /**
@@ -143,8 +147,8 @@
          * @return {}
          **/
         setClinicalInfo(info) {
-            this.initMode();
-            this.ccInfoData = info;
+          this.initMode();
+          this.ccInfoData = info;
         }
 
         /**
@@ -154,9 +158,9 @@
          * Create by 김민정 on 2019-01-08 오전 11:56
          * @param {}
          * @return {}
-        **/
+         **/
         setClinicalInfo(info) {
-            this.ccInfoData = info;
+          this.ccInfoData = info;
         }
 
         /**
@@ -166,9 +170,17 @@
          * Create by 김민정 on 2019-01-08 오전 11:55
          * @param {}
          * @return {}
-        **/
+         **/
         clearClinicalInfo() {
-            this.$.ccInfo.value = "";
+          this.$.ccInfo.value = "";
+        }
+
+        hiddenClinicalInfo(flag){
+          if(flag){
+            this.$.saveBtn.hidden = true;
+          }else{
+            this.$.saveBtn.hidden = false;
+          }
         }
       }
 
